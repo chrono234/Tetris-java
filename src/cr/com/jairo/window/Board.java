@@ -7,13 +7,17 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.Iterator;
 
 import javax.imageio.ImageIO;
+import javax.sound.sampled.Clip;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+
+@SuppressWarnings("serial")
 public class Board extends JPanel implements KeyListener{
+	
+	private Clip music;
 	
 	private BufferedImage blocks;
 	
@@ -36,6 +40,11 @@ public class Board extends JPanel implements KeyListener{
 	private boolean gameOver = false;
 	
 	public Board() {
+        music = Music.LoadSound("music2.wav");
+		music.loop(Clip.LOOP_CONTINUOUSLY);
+		
+
+		
 		try {
 			blocks = ImageIO.read(Board.class.getResource("/tiles.png"));
 		} catch (IOException e) {
@@ -116,6 +125,8 @@ public class Board extends JPanel implements KeyListener{
 	      for (int j = 0; j < board.length; j++) {
 	    	  g.drawLine(j*blockSize, 0, j*blockSize, boardHeight*blockSize);
 		}
+	      
+	      
 		
 	}
 	
