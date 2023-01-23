@@ -11,11 +11,12 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 
 public class MainMenu extends JFrame {
 	private JTextField textField;
+	private JTextField txtDevelopedByJairo;
 	
 	public static void main(String[] args) {
 		MainMenu mm = new MainMenu();
@@ -36,14 +37,14 @@ public class MainMenu extends JFrame {
 		btnNewButton.setForeground(new Color(0, 0, 0));
 		btnNewButton.setBackground(new Color(192, 192, 192));
 		btnNewButton.setFont(new Font("HP Simplified Hans", Font.PLAIN, 21));
-		
+
 
 		btnNewButton.addActionListener(new ActionListener() {
-			
 			public void actionPerformed(ActionEvent e) {
 				Window window = new Window();
-				MainMenu mainMenu = new MainMenu();
-				mainMenu.dispose();
+				MainMenu mm = new MainMenu();
+				mm.setVisible(false);
+				btnNewButton.removeActionListener(this);
 			}
 		});
 		
@@ -54,6 +55,15 @@ public class MainMenu extends JFrame {
 		textField.setFont(new Font("Ebrima", Font.BOLD | Font.ITALIC, 30));
 		textField.setText("Tetris J");
 		textField.setColumns(10);
+		
+		txtDevelopedByJairo = new JTextField();
+		txtDevelopedByJairo.setBackground(new Color(128, 128, 255));
+		txtDevelopedByJairo.setHorizontalAlignment(SwingConstants.CENTER);
+		txtDevelopedByJairo.setForeground(new Color(0, 0, 0));
+		txtDevelopedByJairo.setEditable(false);
+		txtDevelopedByJairo.setText("Developed by Jairo");
+		txtDevelopedByJairo.setFont(new Font("Times New Roman", Font.PLAIN, 19));
+		txtDevelopedByJairo.setColumns(10);
 		GroupLayout groupLayout = new GroupLayout(getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -66,6 +76,9 @@ public class MainMenu extends JFrame {
 							.addGap(73)
 							.addComponent(textField, GroupLayout.PREFERRED_SIZE, 268, GroupLayout.PREFERRED_SIZE)))
 					.addContainerGap(90, Short.MAX_VALUE))
+				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+					.addContainerGap(255, Short.MAX_VALUE)
+					.addComponent(txtDevelopedByJairo, GroupLayout.PREFERRED_SIZE, 176, GroupLayout.PREFERRED_SIZE))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -74,10 +87,10 @@ public class MainMenu extends JFrame {
 					.addComponent(textField, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
 					.addGap(113)
 					.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(231, Short.MAX_VALUE))
+					.addPreferredGap(ComponentPlacement.RELATED, 203, Short.MAX_VALUE)
+					.addComponent(txtDevelopedByJairo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 		);
 		getContentPane().setLayout(groupLayout);
-
 		
 	}
 }

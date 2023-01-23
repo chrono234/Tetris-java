@@ -11,7 +11,6 @@ public class Window {
 	private JFrame window;
 	private Board board;
 	
-	
 	public Window() {
 		window = new JFrame("Tetris Game");
 		window.setSize(WIDTH, HEIGHT);
@@ -29,7 +28,6 @@ public class Window {
 		
 		window.setVisible(true);
 	}
-	
 	
 	public static void main(String[] args) {
 		new Window();
