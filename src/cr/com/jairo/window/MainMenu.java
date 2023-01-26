@@ -45,7 +45,6 @@ public class MainMenu extends JFrame {
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setResizable(false);
 		this.setLocationRelativeTo(null);
-		this.setIconImage(new ImageIcon("C:\\Users\\jairo O\\eclipse-workspace\\Projecto-Visual\\src\\img\\Logo.png").getImage());
 		this.setUndecorated(true);
 
 		contentPane = new JPanel();
@@ -62,14 +61,14 @@ public class MainMenu extends JFrame {
     		contentPane.addMouseMotionListener(new MouseMotionAdapter() {
     			@Override
     			public void mouseDragged(MouseEvent e) {
-    				headerMouseDragged(e);
+    				contentPaneMouseDragged(e);
     			     
     			} 
     		});
     		contentPane.addMouseListener(new MouseAdapter() {
     			@Override
     			public void mousePressed(MouseEvent e) {
-    				headerMousePressed(e);
+    				contentPaneMousePressed(e);
     			}
     		});
     		
@@ -150,12 +149,12 @@ public class MainMenu extends JFrame {
 	    } 
 	} 
 	
-	private void headerMousePressed(java.awt.event.MouseEvent evt) {
+	private void contentPaneMousePressed(java.awt.event.MouseEvent evt) {
         xMouse = evt.getX();
         yMouse = evt.getY();
     }
 	
-	private void headerMouseDragged(java.awt.event.MouseEvent evt) {
+	private void contentPaneMouseDragged(java.awt.event.MouseEvent evt) {
         int x = evt.getXOnScreen();
         int y = evt.getYOnScreen();
         this.setLocation(x - xMouse, y - yMouse);
