@@ -1,6 +1,7 @@
 package cr.com.jairo.window;
 
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -32,7 +33,7 @@ public class Window {
 		
 		window.getContentPane().add(board, BorderLayout.CENTER);
 		window.addKeyListener(board);
-		
+		window.setIconImage(new ImageIcon("C:\\Users\\jairo O\\eclipse-workspace\\Projecto-Visual\\src\\img\\Logo.png").getImage());
 		window.setVisible(true);
 		
 	}
