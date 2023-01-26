@@ -2,36 +2,34 @@ package cr.com.jairo.window;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 import java.io.File;
 import java.io.IOException;
-
 import javax.imageio.ImageIO;
-import javax.sound.sampled.Clip;
-import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
-import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.BevelBorder;
-import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
-import javax.swing.border.EtchedBorder;
-import javax.swing.border.LineBorder;
-import javax.swing.border.MatteBorder;
 import javax.swing.border.SoftBevelBorder;
-import javax.swing.border.TitledBorder;
-import java.awt.SystemColor;
 
 public class MainMenu extends JFrame {
+	private JPanel contentPane;
 	private JTextField textField;
 	private JTextField txtDevelopedByJairo;
+	int xMouse, yMouse;
+	
+	private JLabel labelExit;
 	
 	public static void main(String[] args) {
 		MainMenu mm = new MainMenu();
@@ -48,13 +46,35 @@ public class MainMenu extends JFrame {
 		this.setResizable(false);
 		this.setLocationRelativeTo(null);
 		this.setIconImage(new ImageIcon("C:\\Users\\jairo O\\eclipse-workspace\\Projecto-Visual\\src\\img\\Logo.png").getImage());
+		this.setUndecorated(true);
+
+		contentPane = new JPanel();
+		contentPane.setBackground(SystemColor.control);
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
 		
 		try {
             FondoSwing fondo = new FondoSwing(ImageIO
             		.read(new File("C:\\Users\\jairo O\\eclipse-workspace\\TetrisJ\\textures\\fondo.jpg")));
             JPanel panel = (JPanel) this.getContentPane();
-		
+            contentPane.setLayout(null);
+            
+    		contentPane.addMouseMotionListener(new MouseMotionAdapter() {
+    			@Override
+    			public void mouseDragged(MouseEvent e) {
+    				headerMouseDragged(e);
+    			     
+    			} 
+    		});
+    		contentPane.addMouseListener(new MouseAdapter() {
+    			@Override
+    			public void mousePressed(MouseEvent e) {
+    				headerMousePressed(e);
+    			}
+    		});
+    		
 		JButton btnInicio = new JButton("Inicio");
+		btnInicio.setBounds(146, 317, 100, 42);
 		btnInicio.setForeground(new Color(0, 0, 0));
 		btnInicio.setBackground(SystemColor.inactiveCaptionBorder);
 		btnInicio.setFont(new Font("HP Simplified Hans", Font.PLAIN, 21));
@@ -70,6 +90,7 @@ public class MainMenu extends JFrame {
 		});
 		
 		textField = new JTextField();
+		textField.setBounds(53, 109, 268, 97);
 		textField.setForeground(new Color(255, 255, 255));
 		textField.setHorizontalAlignment(SwingConstants.CENTER);
 		textField.setEditable(false);
@@ -80,6 +101,7 @@ public class MainMenu extends JFrame {
 		textField.setOpaque(false);
 		
 		txtDevelopedByJairo = new JTextField();
+		txtDevelopedByJairo.setBounds(224, 618, 176, 32);
 		txtDevelopedByJairo.setBackground(new Color(128, 128, 255));
 		txtDevelopedByJairo.setHorizontalAlignment(SwingConstants.CENTER);
 		txtDevelopedByJairo.setForeground(SystemColor.textHighlightText);
@@ -89,36 +111,53 @@ public class MainMenu extends JFrame {
 		txtDevelopedByJairo.setColumns(10);
 		txtDevelopedByJairo.setBorder(javax.swing.BorderFactory.createEmptyBorder());
 		txtDevelopedByJairo.setOpaque(false);
-		
-		GroupLayout groupLayout = new GroupLayout(getContentPane());
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(146)
-					.addComponent(btnInicio, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(140, Short.MAX_VALUE))
-				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap(210, Short.MAX_VALUE)
-					.addComponent(txtDevelopedByJairo, GroupLayout.PREFERRED_SIZE, 176, GroupLayout.PREFERRED_SIZE))
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(53)
-					.addComponent(textField, GroupLayout.PREFERRED_SIZE, 268, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(65, Short.MAX_VALUE))
-		);
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(109)
-					.addComponent(textField, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
-					.addGap(111)
-					.addComponent(btnInicio, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, 223, Short.MAX_VALUE)
-					.addComponent(txtDevelopedByJairo, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE))
-		);
-		getContentPane().setLayout(groupLayout);
 		panel.setBorder(fondo);
+		contentPane.setLayout(null);
+		
+		JPanel btnExit = new JPanel();
+		btnExit.setBounds(368, 0, 32, 32);
+		contentPane.add(btnExit);
+		btnExit.setOpaque(false); 
+		
+		btnExit.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				dispose();
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				labelExit.setForeground(Color.red);
+			}			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnExit.setBackground(Color.white);
+			    labelExit.setForeground(Color.black);
+			} 
+		});
+		
+		labelExit = new JLabel("X");
+		labelExit.setBounds(0, 0, 32, 36);
+		btnExit.add(labelExit);
+		labelExit.setHorizontalAlignment(SwingConstants.CENTER);
+		labelExit.setForeground(SystemColor.black);
+		labelExit.setFont(new Font("Roboto", Font.PLAIN, 18));
+		
+		contentPane.add(btnInicio);
+		contentPane.add(txtDevelopedByJairo);
+		contentPane.add(textField);
 		} catch (IOException ex) {
 	        JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-	    }
-	}
+	    } 
+	} 
+	
+	private void headerMousePressed(java.awt.event.MouseEvent evt) {
+        xMouse = evt.getX();
+        yMouse = evt.getY();
+    }
+	
+	private void headerMouseDragged(java.awt.event.MouseEvent evt) {
+        int x = evt.getXOnScreen();
+        int y = evt.getYOnScreen();
+        this.setLocation(x - xMouse, y - yMouse);
+}
 }
