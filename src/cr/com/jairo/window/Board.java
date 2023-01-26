@@ -13,6 +13,8 @@ import javax.sound.sampled.Clip;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import cr.com.jairo.music.Music;
+
 
 @SuppressWarnings("serial")
 public class Board extends JPanel implements KeyListener{
@@ -44,7 +46,6 @@ public class Board extends JPanel implements KeyListener{
 		music.loop(Clip.LOOP_CONTINUOUSLY);
 		
 
-		
 		try {
 			blocks = ImageIO.read(Board.class.getResource("/tiles.png"));
 		} catch (IOException e) {

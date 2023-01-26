@@ -1,8 +1,7 @@
-package cr.com.jairo.window;
+package cr.com.jairo.music;
 
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-
 
 public class Music {
 	
